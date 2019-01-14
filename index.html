@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kth's websocket server</title>
+</head>
+
+<body>
+    <h1>구매목록</h1>
+    <ul>
+    </ul>
+    <audio id="audio1">
+    </audio>
+    <button id="startButton" onclick="onStart()">start</button>
+</body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io.connect();
+
+    var audio = document.getElementById('audio1');
+    audio.src = 'https://cdn.instructables.com/ORIG/FO7/STEA/GLKMTSJ1/FO7STEAGLKMTSJ1.mp3';
+
+    var onStart = function() {
+        onPlayAudio();
+        document.getElementById('startButton').style.display = 'none';
+    }
+
+    var onPlayAudio = function () {
+        var playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(function () {
+                // Automatic playback started!
+            }).catch(function (error) {
+                console.log('error', error);
+                // Automatic playback failed.
+                // Show a UI element to let the user manually start playback.
+            });
+        }
+    }
+
+
+
+    socket.on('fromServer', function (data) {
+        console.log(data);
+        var el = document.createElement('li');
+        el.innerHTML = data.name;
+        onPlayAudio();
+
+
+        document.getElementsByTagName('ul')[0].appendChild(el);
+    })
+</script>
+
+</html>
