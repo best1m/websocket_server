@@ -24,6 +24,16 @@
     var audio = document.getElementById('audio1');
     audio.src = 'https://cdn.instructables.com/ORIG/FO7/STEA/GLKMTSJ1/FO7STEAGLKMTSJ1.mp3';
 
+    socket.on('fromServer', function (data) {
+        console.log(data);
+        var el = document.createElement('li');
+        el.innerHTML = data.name;
+        onPlayAudio();
+
+
+        document.getElementsByTagName('ul')[0].appendChild(el);
+    })
+
     var onStart = function() {
         onPlayAudio();
         document.getElementById('startButton').style.display = 'none';
@@ -42,18 +52,7 @@
             });
         }
     }
-
-
-
-    socket.on('fromServer', function (data) {
-        console.log(data);
-        var el = document.createElement('li');
-        el.innerHTML = data.name;
-        onPlayAudio();
-
-
-        document.getElementsByTagName('ul')[0].appendChild(el);
-    })
+   
 </script>
 
 </html>
