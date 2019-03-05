@@ -1,6 +1,7 @@
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var PORT = 7777;
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
@@ -18,6 +19,6 @@ io.on('connection', function (socket) {
 });
 
 
-server.listen(7777, function () {
-  console.log('listening on 1127 server');
+server.listen(PORT, function () {
+  console.log('listening on ${POST} server');
 });
