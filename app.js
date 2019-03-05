@@ -20,5 +20,5 @@ io.on('connection', function (socket) {
 
 
 server.listen(PORT, function () {
-  console.log('listening on ${POST} server');
+  console.log(`listening on ${PORT} server`);
 });
