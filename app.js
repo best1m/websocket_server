@@ -18,6 +18,6 @@ io.on('connection', function (socket) {
 });
 
 
-server.listen(1127, function () {
+server.listen(7777, function () {
   console.log('listening on 1127 server');
 });
